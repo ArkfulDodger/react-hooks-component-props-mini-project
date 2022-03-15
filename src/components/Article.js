@@ -1,16 +1,14 @@
 import React from "react";
 
 function Article({title, date="January 1, 1970", preview, minutes}) {
-    let emoji = minutes < 30 ? '☕️' : '🍱';
-    let num = Math.ceil(minutes < 30 ? minutes / 5 : minutes / 10);
+    const [emoji, interval] = minutes < 30 ? ['☕️', 5] : ['🍱', 10];
+    const emojiNum = Math.ceil(minutes / interval);
+    const emojis = emoji.repeat(emojiNum);
 
     return (
         <article>
             <h3>{title}</h3>
-            <small>{date}</small>
-            <small> • </small>
-            <small>{emoji.repeat(num)} </small>
-            <small>{minutes} minute read</small>
+            <small>{date} • {emojis} {minutes} minute read</small>
             <p>{preview}</p>
         </article>
     )
